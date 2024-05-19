@@ -27,8 +27,8 @@ export default function Page() {
       </div>
 
       {/* Second Column, logo sidebar */}
-      <div className="h-full bg-blue-100 hidden lg:flex items-center justify-center">
-        <Image src={`/logo.svg`} alt="logo" height={100} width={100} />
+      <div className="h-full bg-blue-700 hidden lg:flex items-center justify-center">
+        <Image src={`/logo_white.svg`} alt="logo" height={100} width={100} />
       </div>
     </div>
   );
