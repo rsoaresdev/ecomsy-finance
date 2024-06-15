@@ -8,9 +8,12 @@ export default function Page() {
       {/* First Column, login form */}
       <div className="h-full lg:flex flex-col items-center justify-center px-4">
         <div className="text-center space-y-4 pt-16">
-          <h1 className="font-bold text-3xl text-[#2E2A47]">Welcome back!</h1>
+          <h1 className="font-bold text-3xl text-[#2E2A47]">
+            Bem-vindo de volta!
+          </h1>
           <p className="text-base text-[#7E8CA0]">
-            Log in to your account to access your financial dashboard!
+            Inicie sessão na sua conta para aceder ao seu painel de controlo
+            financeiro!
           </p>
         </div>
         <div className="flex items-center justify-center mt-8">
