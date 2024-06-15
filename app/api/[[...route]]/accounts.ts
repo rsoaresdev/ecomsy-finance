@@ -1,10 +1,10 @@
+import { z } from "zod";
 import { Hono } from "hono";
 import { clerkMiddleware, getAuth } from "@hono/clerk-auth";
 import { zValidator } from "@hono/zod-validator";
-import { createId } from "@paralleldrive/cuid2";
 
-import { eq } from "drizzle-orm";
 import { db } from "@/db/drizzle";
+import { and, eq, inArray } from "drizzle-orm";
 import { accounts, insertAccountSchema } from "@/db/schema";
 
 const app = new Hono()
@@ -42,6 +42,34 @@ const app = new Hono()
           ...values,
         })
         .returning();
+
+      return c.json({ data });
+    }
+  )
+  // I'm using /bulk-delete on a POST method because I want to pass an array of IDs to delete, somehow I can't do it on a DELETE method
+  .post(
+    "/bulk-delete",
+    clerkMiddleware(),
+    zValidator("json", z.object({ ids: z.array(z.string()) })),
+    async (c) => {
+      const auth = getAuth(c);
+      const values = c.req.valid("json");
+
+      if (!auth?.userId) {
+        return c.json({ error: "Unauthorized" }, 403);
+      }
+
+      const data = await db
+        .delete(accounts)
+        .where(
+          and(
+            eq(accounts.userId, auth.userId),
+            inArray(accounts.id, values.ids)
+          )
+        )
+        .returning({
+          id: accounts.id,
+        });
 
       return c.json({ data });
     }

@@ -1,4 +1,3 @@
-import { createId } from "@paralleldrive/cuid2";
 import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 

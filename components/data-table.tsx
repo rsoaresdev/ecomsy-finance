@@ -3,6 +3,8 @@
 import * as React from "react";
 import { Trash } from "lucide-react";
 
+import { useConfirm } from "@/hooks/use-confirm";
+
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -32,6 +34,7 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   filterKey: string;
+  filterKeyName?: string;
   onDelete: (rows: Row<TData>[]) => void;
   disabled?: boolean;
 }
@@ -40,9 +43,14 @@ export function DataTable<TData, TValue>({
   columns,
   data,
   filterKey,
+  filterKeyName,
   onDelete,
   disabled,
 }: DataTableProps<TData, TValue>) {
+  const [ConfirmDialog, confirm] = useConfirm(
+    "Tem a certeza?",
+    "Ao confirmar está a apagar as contas bancárias selecionadas permanentemente."
+  );
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -68,9 +76,10 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
+      <ConfirmDialog />
       <div className="flex items-center py-4">
         <Input
-          placeholder={`Filtrar por ${filterKey}...`}
+          placeholder={`Filtrar por ${filterKeyName || filterKey}...`}
           value={(table.getColumn(filterKey)?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn(filterKey)?.setFilterValue(event.target.value)
@@ -83,6 +92,14 @@ export function DataTable<TData, TValue>({
             size="sm"
             variant="outline"
             className="ml-auto font-normal text-xs"
+            onClick={async () => {
+              const ok = await confirm();
+
+              if (ok) {
+                onDelete(table.getFilteredSelectedRowModel().rows);
+                table.resetRowSelection();
+              }
+            }}
           >
             <Trash className="size-4 mr-2" />
             Apagar ({table.getFilteredSelectedRowModel().rows.length})
