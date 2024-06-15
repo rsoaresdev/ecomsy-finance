@@ -49,7 +49,7 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const [ConfirmDialog, confirm] = useConfirm(
     "Tem a certeza?",
-    "Ao confirmar está a apagar as contas bancárias e as suas transações selecionadas permanentemente."
+    "Está prestes a apagar vários registos de uma só vez! Tem a certeza de que deseja prosseguir?"
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
