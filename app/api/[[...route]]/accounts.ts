@@ -50,7 +50,7 @@ const app = new Hono()
           name: accounts.name,
         })
         .from(accounts)
-        // (1) check if the account if propriety from the user
+        // (1) check if the account is propriety from the user
         // (2) check if the account is present in params
         .where(and(eq(accounts.userId, auth.userId), eq(accounts.id, id)));
 
@@ -143,7 +143,7 @@ const app = new Hono()
       const [data] = await db
         .update(accounts)
         .set(values)
-        // (1) check if the account if propriety from the user
+        // (1) check if the account is propriety from the user
         // (2) check if the account is present in params
         .where(and(eq(accounts.userId, auth.userId), eq(accounts.id, id)))
         .returning();
@@ -178,7 +178,7 @@ const app = new Hono()
 
       const [data] = await db
         .delete(accounts)
-        // (1) check if the account if propriety from the user
+        // (1) check if the account is propriety from the user
         // (2) check if the account is present in params
         .where(and(eq(accounts.userId, auth.userId), eq(accounts.id, id)))
         .returning({

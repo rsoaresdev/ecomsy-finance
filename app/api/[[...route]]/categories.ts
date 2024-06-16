@@ -50,7 +50,7 @@ const app = new Hono()
           name: categories.name,
         })
         .from(categories)
-        // (1) check if the category if propriety from the user
+        // (1) check if the category is propriety from the user
         // (2) check if the category is present in params
         .where(and(eq(categories.userId, auth.userId), eq(categories.id, id)));
 
@@ -143,7 +143,7 @@ const app = new Hono()
       const [data] = await db
         .update(categories)
         .set(values)
-        // (1) check if the category if propriety from the user
+        // (1) check if the category is propriety from the user
         // (2) check if the category is present in params
         .where(and(eq(categories.userId, auth.userId), eq(categories.id, id)))
         .returning();
@@ -178,7 +178,7 @@ const app = new Hono()
 
       const [data] = await db
         .delete(categories)
-        // (1) check if the category if propriety from the user
+        // (1) check if the category is propriety from the user
         // (2) check if the category is present in params
         .where(and(eq(categories.userId, auth.userId), eq(categories.id, id)))
         .returning({
