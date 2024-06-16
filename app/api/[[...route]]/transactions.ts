@@ -138,6 +138,30 @@ const app = new Hono()
       return c.json({ data });
     }
   )
+  .post(
+    "/bulk-create",
+    clerkMiddleware(),
+    zValidator("json", z.array(insertTransactionSchema.omit({ id: true }))),
+    async (c) => {
+      const auth = getAuth(c);
+      const values = c.req.valid("json");
+
+      if (!auth?.userId) {
+        return c.json({ error: "Unauthorized" }, 403);
+      }
+
+      const data = await db
+        .insert(transactions)
+        .values(
+          values.map((value) => ({
+            ...value,
+          }))
+        )
+        .returning();
+
+      return c.json({ data });
+    }
+  )
   // I'm using /bulk-delete on a POST method because I want to pass an array of IDs to delete, somehow I can't do it on a DELETE method
   .post(
     "/bulk-delete",
