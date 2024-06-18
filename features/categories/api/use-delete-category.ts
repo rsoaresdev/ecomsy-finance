@@ -25,7 +25,7 @@ export const useDeleteCategory = (id?: string) => {
       // TODO: Invalidate summary and transactions
     },
     onError: () => {
-      toast.success("Ocorreu um erro ao apagar a categoria");
+      toast.error("Ocorreu um erro ao apagar a categoria");
     },
   });
 

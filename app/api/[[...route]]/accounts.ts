@@ -2,6 +2,7 @@ import { z } from "zod";
 import { Hono } from "hono";
 import { clerkMiddleware, getAuth } from "@hono/clerk-auth";
 import { zValidator } from "@hono/zod-validator";
+import { createId } from "@paralleldrive/cuid2";
 
 import { db } from "@/db/drizzle";
 import { and, eq, inArray } from "drizzle-orm";
@@ -29,7 +30,7 @@ const app = new Hono()
     zValidator(
       "param",
       z.object({
-        id: z.string().uuid().optional(),
+        id: z.string().optional(),
       })
     ),
     async (c) => {
@@ -76,6 +77,7 @@ const app = new Hono()
       const [data] = await db
         .insert(accounts)
         .values({
+          id: createId(),
           userId: auth.userId,
           ...values,
         })

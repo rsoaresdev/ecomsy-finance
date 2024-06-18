@@ -25,7 +25,7 @@ export const useDeleteTransaction = (id?: string) => {
       // TODO: Invalidate summary
     },
     onError: () => {
-      toast.success("Ocorreu um erro ao apagar a transação");
+      toast.error("Ocorreu um erro ao apagar a transação");
     },
   });
 

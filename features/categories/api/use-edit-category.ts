@@ -29,7 +29,7 @@ export const useEditCategory = (id?: string) => {
       // TODO: Invalidate summary and transactions
     },
     onError: () => {
-      toast.success("Ocorreu um erro ao editar a categoria");
+      toast.error("Ocorreu um erro ao editar a categoria");
     },
   });
 

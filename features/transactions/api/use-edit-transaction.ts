@@ -29,7 +29,7 @@ export const useEditTransaction = (id?: string) => {
       // TODO: Invalidate summary
     },
     onError: () => {
-      toast.success("Ocorreu um erro ao editar a transação");
+      toast.error("Ocorreu um erro ao editar a transação");
     },
   });
 

@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { Hono } from "hono";
 import { parse, subDays } from "date-fns";
+import { formatInTimeZone, toDate } from "date-fns-tz";
 import { clerkMiddleware, getAuth } from "@hono/clerk-auth";
 import { zValidator } from "@hono/zod-validator";
 
@@ -8,10 +9,11 @@ import { db } from "@/db/drizzle";
 import { and, desc, eq, gte, inArray, lte, sql } from "drizzle-orm";
 import {
   transactions,
-  insertTransactionSchema,
+  insertTransactionsSchema,
   categories,
   accounts,
 } from "@/db/schema";
+import { createId } from "@paralleldrive/cuid2";
 
 const app = new Hono()
   .get(
@@ -119,7 +121,7 @@ const app = new Hono()
   .post(
     "/",
     clerkMiddleware(),
-    zValidator("json", insertTransactionSchema.omit({ id: true })),
+    zValidator("json", insertTransactionsSchema.omit({ id: true })),
     async (c) => {
       const auth = getAuth(c);
       const values = c.req.valid("json");
@@ -131,17 +133,22 @@ const app = new Hono()
       const [data] = await db
         .insert(transactions)
         .values({
+          id: createId(),
           ...values,
+          date: new Date(
+            formatInTimeZone(values.date, "Europe/Lisbon", "yyyy-MM-dd")
+          ),
         })
         .returning();
 
       return c.json({ data });
     }
   )
+
   .post(
     "/bulk-create",
     clerkMiddleware(),
-    zValidator("json", z.array(insertTransactionSchema.omit({ id: true }))),
+    zValidator("json", z.array(insertTransactionsSchema.omit({ id: true }))),
     async (c) => {
       const auth = getAuth(c);
       const values = c.req.valid("json");
@@ -154,6 +161,7 @@ const app = new Hono()
         .insert(transactions)
         .values(
           values.map((value) => ({
+            id: createId(),
             ...value,
           }))
         )
@@ -219,7 +227,7 @@ const app = new Hono()
     ),
     zValidator(
       "json",
-      insertTransactionSchema.omit({
+      insertTransactionsSchema.omit({
         id: true,
       })
     ),

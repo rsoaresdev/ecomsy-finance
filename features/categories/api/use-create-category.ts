@@ -20,7 +20,7 @@ export const useCreateCategory = () => {
       queryClient.invalidateQueries({ queryKey: ["categories"] });
     },
     onError: () => {
-      toast.success("Ocorreu um erro ao criar a categoria");
+      toast.error("Ocorreu um erro ao criar a categoria");
     },
   });
 

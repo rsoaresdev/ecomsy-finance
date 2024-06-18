@@ -23,7 +23,7 @@ export const useCreateTransaction = () => {
       //TODO: Invalidate summary
     },
     onError: () => {
-      toast.success("Ocorreu um erro ao criar a transação");
+      toast.error("Ocorreu um erro ao criar a transação");
     },
   });
 

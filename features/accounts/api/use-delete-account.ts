@@ -25,7 +25,7 @@ export const useDeleteAccount = (id?: string) => {
       // TODO: Invalidate summary and transactions
     },
     onError: () => {
-      toast.success("Ocorreu um erro ao apagar a conta");
+      toast.error("Ocorreu um erro ao apagar a conta");
     },
   });
 

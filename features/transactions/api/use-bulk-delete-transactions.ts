@@ -27,7 +27,7 @@ export const useBulkDeleteTransactions = () => {
       // TODO: Also invalidate summary
     },
     onError: () => {
-      toast.success("Ocorreu um erro ao apagar transações");
+      toast.error("Ocorreu um erro ao apagar transações");
     },
   });
 
