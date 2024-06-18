@@ -80,7 +80,7 @@ const app = new Hono()
     zValidator(
       "param",
       z.object({
-        id: z.string().uuid().optional(),
+        id: z.string().optional(),
       })
     ),
     async (c) => {
@@ -135,9 +135,9 @@ const app = new Hono()
         .values({
           id: createId(),
           ...values,
-          date: new Date(
-            formatInTimeZone(values.date, "Europe/Lisbon", "yyyy-MM-dd")
-          ),
+          // date: new Date(
+          //   formatInTimeZone(values.date, "Europe/Lisbon", "yyyy-MM-dd")
+          // ),
         })
         .returning();
 

@@ -3,6 +3,7 @@ import { InferRequestType, InferResponseType } from "hono";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { client } from "@/lib/hono";
+import { toastAlert } from "@/lib/utils";
 
 type ResponseType = InferResponseType<typeof client.api.categories.$post>;
 type RequestType = InferRequestType<typeof client.api.categories.$post>["json"];
@@ -16,11 +17,11 @@ export const useCreateCategory = () => {
       return await response.json();
     },
     onSuccess: () => {
-      toast.success("Categoria criada com sucesso");
+      toastAlert("Categoria criada com sucesso", "success");
       queryClient.invalidateQueries({ queryKey: ["categories"] });
     },
     onError: () => {
-      toast.error("Ocorreu um erro ao criar a categoria");
+      toastAlert("Ocorreu um erro ao criar a categoria", "danger");
     },
   });
 

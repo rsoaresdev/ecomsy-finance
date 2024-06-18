@@ -3,6 +3,7 @@ import { InferRequestType, InferResponseType } from "hono";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { client } from "@/lib/hono";
+import { toastAlert } from "@/lib/utils";
 
 type ResponseType = InferResponseType<typeof client.api.accounts.$post>;
 type RequestType = InferRequestType<typeof client.api.accounts.$post>["json"];
@@ -16,11 +17,11 @@ export const useCreateAccount = () => {
       return await response.json();
     },
     onSuccess: () => {
-      toast.success("Conta criada com sucesso");
+      toastAlert("Conta criada com sucesso", "success");
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
     },
     onError: () => {
-      toast.error("Ocorreu um erro ao criar a conta");
+      toastAlert("Ocorreu um erro ao criar a conta", "danger");
     },
   });
 

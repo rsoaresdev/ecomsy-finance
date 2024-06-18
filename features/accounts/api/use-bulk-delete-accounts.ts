@@ -3,6 +3,7 @@ import { InferRequestType, InferResponseType } from "hono";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { client } from "@/lib/hono";
+import { toastAlert } from "@/lib/utils";
 
 type ResponseType = InferResponseType<
   (typeof client.api.accounts)["bulk-delete"]["$post"]
@@ -22,12 +23,12 @@ export const useBulkDeleteAccounts = () => {
       return await response.json();
     },
     onSuccess: () => {
-      toast.success("Contas bancárias apagadas com sucesso");
+      toastAlert("Contas bancárias apagadas com sucesso", "success");
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
       // TODO: Also invalidate summary
     },
     onError: () => {
-      toast.error("Ocorreu um erro ao apagar contas bancárias");
+      toastAlert("Ocorreu um erro ao apagar contas bancárias", "danger");
     },
   });
 

@@ -3,6 +3,7 @@ import { InferRequestType, InferResponseType } from "hono";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { client } from "@/lib/hono";
+import { toastAlert } from "@/lib/utils";
 
 type ResponseType = InferResponseType<
   (typeof client.api.transactions)[":id"]["$patch"]
@@ -23,13 +24,13 @@ export const useEditTransaction = (id?: string) => {
       return await response.json();
     },
     onSuccess: () => {
-      toast.success("Transação atualizada com sucesso");
+      toastAlert("Transação atualizada com sucesso", "success");
       queryClient.invalidateQueries({ queryKey: ["transaction", { id }] });
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
       // TODO: Invalidate summary
     },
     onError: () => {
-      toast.error("Ocorreu um erro ao editar a transação");
+      toastAlert("Ocorreu um erro ao editar a transação", "danger");
     },
   });
 

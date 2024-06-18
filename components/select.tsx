@@ -48,6 +48,7 @@ export const Select = ({
       onCreateOption={onCreate}
       isDisabled={disabled}
       formatCreateLabel={(option) => `Criar ${option}`
+      
       }
     />
   );

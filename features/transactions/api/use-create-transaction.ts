@@ -3,6 +3,7 @@ import { InferRequestType, InferResponseType } from "hono";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { client } from "@/lib/hono";
+import { toastAlert } from "@/lib/utils";
 
 type ResponseType = InferResponseType<typeof client.api.transactions.$post>;
 type RequestType = InferRequestType<
@@ -18,12 +19,12 @@ export const useCreateTransaction = () => {
       return await response.json();
     },
     onSuccess: () => {
-      toast.success("Transação criada com sucesso");
+      toastAlert("Transação criada com sucesso", "success");
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
       //TODO: Invalidate summary
     },
     onError: () => {
-      toast.error("Ocorreu um erro ao criar a transação");
+      toastAlert("Ocorreu um erro ao criar a transação", "danger");
     },
   });
 

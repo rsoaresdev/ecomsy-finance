@@ -3,6 +3,7 @@ import { InferResponseType } from "hono";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { client } from "@/lib/hono";
+import { toastAlert } from "@/lib/utils";
 
 type ResponseType = InferResponseType<
   (typeof client.api.accounts)[":id"]["$delete"]
@@ -19,13 +20,14 @@ export const useDeleteAccount = (id?: string) => {
       return await response.json();
     },
     onSuccess: () => {
-      toast.success("Conta apagada com sucesso");
+      toastAlert("Conta apagada com sucesso", "success");
       queryClient.invalidateQueries({ queryKey: ["account", { id }] });
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
-      // TODO: Invalidate summary and transactions
+      queryClient.invalidateQueries({ queryKey: ["transactions"] });
+      // TODO: Invalidate summary
     },
     onError: () => {
-      toast.error("Ocorreu um erro ao apagar a conta");
+      toastAlert("Ocorreu um erro ao apagar a conta", "danger");
     },
   });
 

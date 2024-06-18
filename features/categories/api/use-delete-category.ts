@@ -3,6 +3,7 @@ import { InferResponseType } from "hono";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { client } from "@/lib/hono";
+import { toastAlert } from "@/lib/utils";
 
 type ResponseType = InferResponseType<
   (typeof client.api.categories)[":id"]["$delete"]
@@ -19,13 +20,14 @@ export const useDeleteCategory = (id?: string) => {
       return await response.json();
     },
     onSuccess: () => {
-      toast.success("Categoria apagada com sucesso");
+      toastAlert("Categoria apagada com sucesso", "success");
       queryClient.invalidateQueries({ queryKey: ["category", { id }] });
       queryClient.invalidateQueries({ queryKey: ["categories"] });
-      // TODO: Invalidate summary and transactions
+      queryClient.invalidateQueries({ queryKey: ["transactions"] });
+      // TODO: Invalidate summary
     },
     onError: () => {
-      toast.error("Ocorreu um erro ao apagar a categoria");
+      toastAlert("Ocorreu um erro ao apagar a categoria", "danger");
     },
   });
 

@@ -4,8 +4,8 @@ import { Edit, MoreHorizontal, TrashIcon } from "lucide-react";
 
 import { useConfirm } from "@/hooks/use-confirm";
 
-import { useOpenAccount } from "@/features/accounts/hooks/use-open-account";
-import { useDeleteAccount } from "@/features/accounts/api/use-delete-account";
+import { useOpenTransaction } from "@/features/transactions/hooks/use-open-transaction";
+import { useDeleteTransaction } from "@/features/transactions/api/use-delete-transaction";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -20,12 +20,12 @@ type Props = {
 };
 
 export const Actions = ({ id }: Props) => {
-  const deleteMutation = useDeleteAccount(id);
-  const { onOpen } = useOpenAccount();
+  const deleteMutation = useDeleteTransaction(id);
+  const { onOpen } = useOpenTransaction();
 
   const [ConfirmDialog, confirm] = useConfirm(
     "Tem a certeza?",
-    "Ao confirmar está a apagar esta conta bancária permanentemente."
+    "Ao confirmar está a apagar esta transação permanentemente."
   );
 
   const handleDelete = async () => {
