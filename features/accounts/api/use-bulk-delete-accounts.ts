@@ -25,7 +25,7 @@ export const useBulkDeleteAccounts = () => {
     onSuccess: () => {
       toastAlert("Contas bancárias apagadas com sucesso", "success");
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
-      // TODO: Also invalidate summary
+      queryClient.invalidateQueries({ queryKey: ["summary"] });
     },
     onError: () => {
       toastAlert("Ocorreu um erro ao apagar contas bancárias", "danger");

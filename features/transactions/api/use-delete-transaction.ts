@@ -23,7 +23,7 @@ export const useDeleteTransaction = (id?: string) => {
       toastAlert("Transação apagada com sucesso", "success");
       queryClient.invalidateQueries({ queryKey: ["transaction", { id }] });
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
-      // TODO: Invalidate summary
+      queryClient.invalidateQueries({ queryKey: ["summary"] });
     },
     onError: () => {
       toastAlert("Ocorreu um erro ao apagar a transação", "danger");

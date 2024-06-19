@@ -24,7 +24,7 @@ export const useDeleteAccount = (id?: string) => {
       queryClient.invalidateQueries({ queryKey: ["account", { id }] });
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
-      // TODO: Invalidate summary
+      queryClient.invalidateQueries({ queryKey: ["summary"] });
     },
     onError: () => {
       toastAlert("Ocorreu um erro ao apagar a conta", "danger");

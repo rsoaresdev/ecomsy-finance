@@ -25,7 +25,7 @@ export const useBulkDeleteTransactions = () => {
     onSuccess: () => {
       toastAlert("Transações apagadas com sucesso", "success");
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
-      // TODO: Also invalidate summary
+      queryClient.invalidateQueries({ queryKey: ["summary"] });
     },
     onError: () => {
       toastAlert("Ocorreu um erro ao apagar transações", "danger");

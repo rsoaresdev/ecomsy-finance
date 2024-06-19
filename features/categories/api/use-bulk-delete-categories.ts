@@ -25,7 +25,7 @@ export const useBulkDeleteCategories = () => {
     onSuccess: () => {
       toastAlert("Categorias apagadas com sucesso", "success");
       queryClient.invalidateQueries({ queryKey: ["categories"] });
-      // TODO: Also invalidate summary
+      queryClient.invalidateQueries({ queryKey: ["summary"] });
     },
     onError: () => {
       toastAlert("Ocorreu um erro ao apagar categorias", "danger");
