@@ -54,13 +54,13 @@ const app = new Hono().get(
         .select({
           income:
             sql`SUM(CASE WHEN ${transactions.amount} >= 0 THEN ${transactions.amount} ELSE 0 END)`.mapWith(
-              Number
+              transactions.amount
             ),
           expenses:
             sql`SUM(CASE WHEN ${transactions.amount} < 0 THEN ${transactions.amount} ELSE 0 END)`.mapWith(
-              Number
+              transactions.amount
             ),
-          remaining: sum(transactions.amount).mapWith(Number),
+          remaining: sum(transactions.amount).mapWith(transactions.amount),
         })
         .from(transactions)
         .innerJoin(accounts, eq(transactions.accountId, accounts.id))
@@ -81,8 +81,8 @@ const app = new Hono().get(
     );
     const [lastPeriod] = await fetchFinancialData(
       auth.userId,
-      startDate,
-      endDate
+      lastPeriodStart,
+      lastPeriodEnd
     );
 
     const incomeChange = calculatePercentageChange(
@@ -101,7 +101,9 @@ const app = new Hono().get(
     const category = await db
       .select({
         name: categories.name,
-        value: sql`SUM(ABS(${transactions.amount}))`.mapWith(Number),
+        value: sql`SUM(ABS(${transactions.amount}))`.mapWith(
+          transactions.amount
+        ),
       })
       .from(transactions)
       .innerJoin(accounts, eq(transactions.accountId, accounts.id))
@@ -134,11 +136,11 @@ const app = new Hono().get(
         date: transactions.date,
         income:
           sql`SUM(CASE WHEN ${transactions.amount} >= 0 THEN ${transactions.amount} ELSE 0 END)`.mapWith(
-            Number
+            transactions.amount
           ),
         expenses:
           sql`SUM(CASE WHEN ${transactions.amount} < 0 THEN ABS(${transactions.amount}) ELSE 0 END)`.mapWith(
-            Number
+            transactions.amount
           ),
       })
       .from(transactions)
