@@ -1,8 +1,10 @@
 import { config } from "dotenv";
-import { subDays } from "date-fns";
+import { subDays, eachDayOfInterval, format } from "date-fns";
+import { convertAmountToMiliunits } from "@/lib/utils";
+
+import { categories, accounts, transactions } from "@/db/schema";
 import { drizzle } from "drizzle-orm/neon-http";
 import { neon } from "@neondatabase/serverless";
-import { categories, accounts, transactions } from "@/db/schema";
 
 config({ path: ".env.local" });
 
@@ -46,26 +48,23 @@ const defaultFrom = subDays(defaultTo, 90);
 
 const SEED_TRANSACTIONS: (typeof transactions.$inferSelect)[] = [];
 
-import { eachDayOfInterval, format } from "date-fns";
-import { convertAmountToMiliunits } from "@/lib/utils";
-
 const generateRandomAmount = (category: typeof categories.$inferInsert) => {
   switch (category.name) {
     case "Renda":
-      return Math.random() * 400 + 90; // Rent will likely be a larger amount
+      return Number((Math.random() * 400 + 90).toFixed(2)); // Rent will likely be a larger amount
     case "Acessórios":
-      return Math.random() * 200 + 50;
+      return Number((Math.random() * 200 + 50).toFixed(2));
     case "Alimentação":
-      return Math.random() * 30 + 10;
+      return Number((Math.random() * 30 + 10).toFixed(2));
     case "Transporte":
     case "Saúde":
-      return Math.random() * 50 + 15;
+      return Number((Math.random() * 50 + 15).toFixed(2));
     case "Entretenimento":
     case "Roupa":
     case "Outros":
-      return Math.random() * 100 + 20;
+      return Number((Math.random() * 100 + 20).toFixed(2));
     default:
-      return Math.random() * 50 + 10;
+      return Number((Math.random() * 50 + 10).toFixed(2));
   }
 };
 

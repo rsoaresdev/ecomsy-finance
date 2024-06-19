@@ -36,7 +36,6 @@ export const DatePicker = ({ value, onChange, disabled }: Props) => {
           <CalendarIcon className="size-4 mr-2" />
           {value ? (
             //? https://date-fns.org/v3.6.0/docs/format
-            // 16 de junho de 2024
             format(value, "PPP", { locale: pt })
           ) : (
             <span>Selecione uma data</span>
