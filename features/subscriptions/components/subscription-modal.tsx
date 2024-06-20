@@ -25,7 +25,7 @@ export const SubscriptionModal = () => {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader className="flex items-center space-y-4">
-          <Image src="/logo-dark.svg" alt="Logo" width={36} height={36} />
+          <Image src="/logo_dark.svg" alt="Logo" width={36} height={36} />
           <DialogTitle className="text-center">
             Atualizar para o plano premium
           </DialogTitle>
