@@ -11,7 +11,7 @@ config({ path: ".env.local" });
 const sql = neon(process.env.DATABASE_URL!);
 const db = drizzle(sql);
 
-const SEED_USER_ID = "user_2ggy6LW3YjOsr0Ocx8WxA4SFxSL"; // my Clerk auth userId
+const SEED_USER_ID = "user_2i7hE4TZg1GyfJGwmYpVjc997O2"; // my Clerk auth userId
 const SEED_CATEGORIES = [
   {
     id: "category_1",
@@ -44,7 +44,7 @@ const SEED_ACCOUNTS = [
 ];
 
 const defaultTo = new Date();
-const defaultFrom = subDays(defaultTo, 90);
+const defaultFrom = subDays(defaultTo, 365);
 
 const SEED_TRANSACTIONS: (typeof transactions.$inferSelect)[] = [];
 
@@ -69,7 +69,7 @@ const generateRandomAmount = (category: typeof categories.$inferInsert) => {
 };
 
 const generateTransactionsForDay = (day: Date) => {
-  const numTransactions = Math.floor(Math.random() * 4) + 1; // 1 to 4 transactions per day
+  const numTransactions = Math.floor(Math.random() * 12) + 1; // 1 to 12 transactions per day
   for (let i = 0; i < numTransactions; i++) {
     const category =
       SEED_CATEGORIES[Math.floor(Math.random() * SEED_CATEGORIES.length)];
@@ -98,7 +98,7 @@ const generateTransactions = () => {
 
 generateTransactions();
 
-const main = async () => {
+export const main = async () => {
   try {
     // Reset database
     await db.delete(transactions).execute();
@@ -116,4 +116,7 @@ const main = async () => {
   }
 };
 
-main();
+// Só execute a função main se este arquivo for chamado diretamente
+if (require.main === module) {
+  main();
+}

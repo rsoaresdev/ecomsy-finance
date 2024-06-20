@@ -11,7 +11,6 @@ export default function Home() {
   return (
     <div className="relative">
       <div className="absolute -z-40 inset-0 w-full h-screen bg-gradient-to-b from-blue-200 to-white"></div>
-
       <Container>
         <Navbar />
         <Hero />
