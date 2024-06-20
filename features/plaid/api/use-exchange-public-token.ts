@@ -28,7 +28,7 @@ export const useExchangePublicToken = () => {
       return await response.json();
     },
     onSuccess: () => {
-      toastAlert("Token público descodificado com sucesso!", "success");
+      toastAlert("Conta bancária conectada com sucesso!", "success");
 
       // Invalidate queries
       queryClient.invalidateQueries({ queryKey: ["connected-bank"] });

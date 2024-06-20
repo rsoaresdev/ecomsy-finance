@@ -4,14 +4,6 @@ import Image from "next/image";
 import { Container } from "@/components/home/Container";
 
 export function Footer() {
-  const legal = [
-    {
-      name: "Termos de Uso",
-      href: "tos",
-    },
-    { name: "Política de Privacidade", href: "privacy" },
-  ];
-
   return (
     <div className="relative">
       <Container>
@@ -41,20 +33,6 @@ export function Footer() {
           </div>
 
           <div>
-            <div className="flex flex-wrap w-full -mt-2 -ml-3 lg:ml-0">
-              {legal.map((item, index) => (
-                <Link
-                  key={index}
-                  href={item.href}
-                  className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700"
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          <div>
             <div>Siga-nos</div>
             <div className="flex mt-5 space-x-5 text-gray-400 dark:text-gray-500">
               <a href="https://twitter.com/" target="_blank" rel="noopener">
@@ -77,8 +55,14 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="my-10 text-sm text-center text-gray-600 dark:text-gray-400">
-          Copyright © {new Date().getFullYear()}. Feito com ♥ por Rafael Soares
+        <div className="my-10 text-md text-center text-gray-600 dark:text-gray-400">
+          Copyright © {new Date().getFullYear()}. Feito com ♥ por{" "}
+          <Link
+            className="hover:opacity-80"
+            href={"https://github.com/rsoaresdev"}
+          >
+            Rafael Soares
+          </Link>{" "}
           para a PAP.
         </div>
       </Container>

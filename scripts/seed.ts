@@ -30,7 +30,6 @@ const SEED_CATEGORIES = [
     userId: SEED_USER_ID,
     plaidId: null,
   },
-  { id: "category_8", name: "Outros", userId: SEED_USER_ID, plaidId: null },
 ];
 
 const SEED_ACCOUNTS = [
@@ -61,7 +60,6 @@ const generateRandomAmount = (category: typeof categories.$inferInsert) => {
       return Number((Math.random() * 50 + 15).toFixed(2));
     case "Entretenimento":
     case "Roupa":
-    case "Outros":
       return Number((Math.random() * 100 + 20).toFixed(2));
     default:
       return Number((Math.random() * 50 + 10).toFixed(2));

@@ -66,7 +66,6 @@ const app = new Hono()
       }
     );
 
-    console.log({ checkout });
     const checkoutUrl = checkout.data?.data.attributes.url;
 
     if (!checkoutUrl) {

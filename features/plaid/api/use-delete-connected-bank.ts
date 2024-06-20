@@ -24,6 +24,11 @@ export const useDeleteConnectedBank = () => {
     },
     onSuccess: () => {
       toastAlert("Conta bancária desconectada com sucesso!", "success");
+      queryClient.invalidateQueries({ queryKey: ["connected-bank"] });
+      queryClient.invalidateQueries({ queryKey: ["summary"] });
+      queryClient.invalidateQueries({ queryKey: ["transactions"] });
+      queryClient.invalidateQueries({ queryKey: ["accounts"] });
+      queryClient.invalidateQueries({ queryKey: ["categories"] });
     },
     onError: () => {
       toastAlert("Ocorreu um erro ao desconectar a conta bancária.", "danger");

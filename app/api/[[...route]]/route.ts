@@ -34,7 +34,6 @@ const routes = app
   .route("/transactions", transactions)
   .route("/subscriptions", subscriptions)
   .get("/seed", clerkMiddleware(), async (c) => {
-    console.log("entrei");
     const auth = getAuth(c);
 
     if (!auth?.userId) {
