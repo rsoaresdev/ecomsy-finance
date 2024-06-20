@@ -13,7 +13,7 @@ export const Faq = () => {
   return (
     <Container className="!p-0">
       <div className="w-full max-w-2xl p-2 mx-auto rounded-2xl">
-        {faqdata.map((item, _index) => (
+        {data.map((item, _index) => (
           <div key={item.question} className="mb-5">
             <Disclosure>
               {({ open }) => (
@@ -39,7 +39,7 @@ export const Faq = () => {
   );
 };
 
-const faqdata = [
+const data = [
   {
     question:
       "Como o Ecomsy pode ajudar-me a gerir as minhas finanças pessoais?",
