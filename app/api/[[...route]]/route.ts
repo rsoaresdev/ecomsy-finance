@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { cors } from "hono/cors";
 import { handle } from "hono/vercel";
 
 import plaid from "./plaid";
@@ -11,6 +12,16 @@ import subscriptions from "./subscriptions";
 export const runtime = "edge";
 
 const app = new Hono().basePath("/api");
+
+app.use("*", async (c, next) => {
+  const corsMiddleware = cors({
+    origin: "https://www.ecomsy.site",
+    allowHeaders: ["Origin", "Content-Type", "Authorization"],
+    allowMethods: ["GET", "OPTIONS", "POST", "PUT", "DELETE"],
+    credentials: true,
+  });
+  await corsMiddleware(c, next);
+});
 
 const routes = app
   .route("/plaid", plaid)
