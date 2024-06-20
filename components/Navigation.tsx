@@ -11,23 +11,23 @@ import { Button } from "@/components/ui/button";
 
 const routes = [
   {
-    href: "/",
+    href: "/dashboard",
     label: "Visão geral",
   },
   {
-    href: "/transactions",
+    href: "/dashboard/transactions",
     label: "Transações",
   },
   {
-    href: "/accounts",
+    href: "/dashboard/accounts",
     label: "Contas",
   },
   {
-    href: "/categories",
+    href: "/dashboard/categories",
     label: "Categorias",
   },
   {
-    href: "/settings",
+    href: "/dashboard/settings",
     label: "Definições",
   },
 ];

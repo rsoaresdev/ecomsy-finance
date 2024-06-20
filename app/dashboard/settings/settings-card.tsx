@@ -74,7 +74,7 @@ export const SettingsCard = () => {
                 !subscription && "text-muted-foreground"
               )}
             >
-              {subscription ? "Subscription active" : "No subscription active"}
+              {subscription ? "Subscrição ativa" : "Nenhuma subscrição ativa"}
             </div>
             <SubscriptionCheckout />
           </div>

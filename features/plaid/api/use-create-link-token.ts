@@ -20,9 +20,7 @@ export const useCreateLinkToken = () => {
 
       return await response.json();
     },
-    onSuccess: () => {
-      toastAlert("Link-token criado com sucesso!", "success");
-    },
+    onSuccess: () => {},
     onError: () => {
       toastAlert("Ocorreu um erro ao criar o link-token.", "danger");
     },
