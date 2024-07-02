@@ -11,7 +11,7 @@ config({ path: ".env.local" });
 const sql = neon(process.env.DATABASE_URL!);
 const db = drizzle(sql);
 
-const SEED_USER_ID = "user_2i7hE4TZg1GyfJGwmYpVjc997O2"; // my Clerk auth userId
+const SEED_USER_ID = "user_2ii67yZQWpWB8oJnCusS2R0shPy"; // my Clerk auth userId
 const SEED_CATEGORIES = [
   {
     id: "category_1",

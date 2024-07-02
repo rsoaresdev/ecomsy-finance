@@ -41,7 +41,7 @@ const routes = app
     }
 
     try {
-      await seedDatabase(); // Chamando a função de seed
+      await seedDatabase(); // Chama a função de seed (@/scripts/seed)
       return c.json({ status: "ok" });
     } catch (error) {
       console.error("Error during seeding:", error);
