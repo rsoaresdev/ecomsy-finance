@@ -7,7 +7,7 @@ import { useConfirm } from "@/hooks/use-confirm";
 export const PlaidDisconnect = () => {
   const [Dialog, confirm] = useConfirm(
     "Tem a certeza?",
-    "Ao confirmar irá desconectar a sua conta bancária e remover todos os dados associados permanentemente."
+    "Ao confirmar irá desconectar a sua conta bancária e remover todos os dados associados permanentemente.",
   );
   const deleteConnectedBank = useDeleteConnectedBank();
 

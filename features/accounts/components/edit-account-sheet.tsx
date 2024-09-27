@@ -30,7 +30,7 @@ export const EditAccountSheet = () => {
 
   const [ConfirmDialog, confirm] = useConfirm(
     "Tem a certeza?",
-    "Ao confirmar está a apagar esta conta bancária permanentemente."
+    "Ao confirmar está a apagar esta conta bancária permanentemente.",
   );
 
   const accountQuery = useGetAccount(id);

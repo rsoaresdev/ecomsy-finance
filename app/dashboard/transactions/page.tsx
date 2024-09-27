@@ -74,7 +74,7 @@ const TransactionsPage = () => {
   }
 
   const onSubmitImport = async (
-    values: (typeof transactionsSchema.$inferInsert)[]
+    values: (typeof transactionsSchema.$inferInsert)[],
   ) => {
     const accountId = await confirm();
 

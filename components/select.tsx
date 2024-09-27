@@ -47,9 +47,7 @@ export const Select = ({
       options={options}
       onCreateOption={onCreate}
       isDisabled={disabled}
-      formatCreateLabel={(option) => `Criar ${option}`
-      
-      }
+      formatCreateLabel={(option) => `Criar ${option}`}
     />
   );
 };

@@ -70,13 +70,13 @@ const app = new Hono()
     await db
       .delete(accounts)
       .where(
-        and(eq(accounts.userId, auth.userId), isNotNull(accounts.plaidId))
+        and(eq(accounts.userId, auth.userId), isNotNull(accounts.plaidId)),
       );
 
     await db
       .delete(categories)
       .where(
-        and(eq(categories.userId, auth.userId), isNotNull(categories.plaidId))
+        and(eq(categories.userId, auth.userId), isNotNull(categories.plaidId)),
       );
 
     return c.json({ data: connectedBank });
@@ -107,7 +107,7 @@ const app = new Hono()
       "json",
       z.object({
         publicToken: z.string(),
-      })
+      }),
     ),
     async (c) => {
       const auth = getAuth(c);
@@ -148,7 +148,7 @@ const app = new Hono()
             name: account.name,
             plaidId: account.account_id,
             userId: auth.userId,
-          }))
+          })),
         )
         .returning();
 
@@ -160,20 +160,20 @@ const app = new Hono()
             name: category.hierarchy.join(", "),
             plaidId: category.category_id,
             userId: auth.userId,
-          }))
+          })),
         )
         .returning();
 
       const newTransactionsValues = plaidTransactions.data.added.reduce(
         (acc, transaction) => {
           const account = newAccounts.find(
-            (account) => account.plaidId === transaction.account_id
+            (account) => account.plaidId === transaction.account_id,
           );
           const category = newCategories.find(
-            (category) => category.plaidId === transaction.category_id
+            (category) => category.plaidId === transaction.category_id,
           );
           const amountInMiliunits = convertAmountToMiliunits(
-            transaction.amount
+            transaction.amount,
           );
 
           if (account) {
@@ -190,7 +190,7 @@ const app = new Hono()
 
           return acc;
         },
-        [] as (typeof transactions.$inferInsert)[]
+        [] as (typeof transactions.$inferInsert)[],
       );
 
       if (newTransactionsValues.length > 0) {
@@ -198,7 +198,7 @@ const app = new Hono()
       }
 
       return c.json({ ok: true }, 200);
-    }
+    },
   );
 
 export default app;

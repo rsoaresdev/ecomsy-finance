@@ -17,11 +17,11 @@ app.use("*", (c, next) => {
   c.res.headers.append("Access-Control-Allow-Origin", "*");
   c.res.headers.append(
     "Access-Control-Allow-Methods",
-    "GET,POST,PATCH,DELETE,OPTIONS"
+    "GET,POST,PATCH,DELETE,OPTIONS",
   );
   c.res.headers.append(
     "Access-Control-Allow-Headers",
-    "Content-Type, Authorization"
+    "Content-Type, Authorization",
   );
   return next();
 });

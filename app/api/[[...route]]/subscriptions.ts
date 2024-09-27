@@ -63,7 +63,7 @@ const app = new Hono()
         productOptions: {
           redirectUrl: `${process.env.NEXT_PUBLIC_APP_URL!}/`,
         },
-      }
+      },
     );
 
     const checkoutUrl = checkout.data?.data.attributes.url;
@@ -79,12 +79,12 @@ const app = new Hono()
 
     const hmac = crypto.createHmac(
       "sha256",
-      process.env.LEMONSQUEEZY_WEBHOOK_SECRET!
+      process.env.LEMONSQUEEZY_WEBHOOK_SECRET!,
     );
     const digest = Buffer.from(hmac.update(text).digest("hex"), "utf-8");
     const signature = Buffer.from(
       c.req.header("x-signature") as string,
-      "utf8"
+      "utf8",
     );
 
     if (!crypto.timingSafeEqual(digest, signature)) {

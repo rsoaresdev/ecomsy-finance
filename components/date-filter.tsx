@@ -15,7 +15,7 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-  PopoverClose
+  PopoverClose,
 } from "@/components/ui/popover";
 
 export const DateFilter = () => {
@@ -49,7 +49,7 @@ export const DateFilter = () => {
         url: pathname,
         query,
       },
-      { skipEmptyString: true, skipNull: true }
+      { skipEmptyString: true, skipNull: true },
     );
 
     router.push(url);

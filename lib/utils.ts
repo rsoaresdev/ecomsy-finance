@@ -51,7 +51,7 @@ export function fillMissingDays(
     expenses: number;
   }[],
   startDate: Date,
-  endDate: Date
+  endDate: Date,
 ) {
   if (activeDays.length === 0) {
     return [];
@@ -89,7 +89,7 @@ export function formatDateRange(period?: Period) {
     return `${format(defaultFrom, "d MMMM", { locale: pt })} — ${format(
       defaultTo,
       "d MMMM y",
-      { locale: pt }
+      { locale: pt },
     )}`;
   }
 
@@ -97,7 +97,7 @@ export function formatDateRange(period?: Period) {
     return `${format(period.from, "d MMMM", { locale: pt })} — ${format(
       period.to,
       "d MMMM y",
-      { locale: pt }
+      { locale: pt },
     )}`;
   }
 
@@ -108,7 +108,7 @@ export function formatPercentage(
   value: number,
   options: { addPrefix?: boolean } = {
     addPrefix: false,
-  }
+  },
 ) {
   const result = new Intl.NumberFormat("pt-PT", {
     style: "percent",

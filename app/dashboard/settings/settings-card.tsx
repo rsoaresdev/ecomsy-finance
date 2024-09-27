@@ -52,7 +52,7 @@ export const SettingsCard = () => {
             <div
               className={cn(
                 "text-sm truncate flex items-center",
-                !connectedBank && "text-muted-foreground"
+                !connectedBank && "text-muted-foreground",
               )}
             >
               {connectedBank
@@ -71,7 +71,7 @@ export const SettingsCard = () => {
             <div
               className={cn(
                 "text-sm truncate flex items-center",
-                !subscription && "text-muted-foreground"
+                !subscription && "text-muted-foreground",
               )}
             >
               {subscription ? "Subscrição ativa" : "Nenhuma subscrição ativa"}

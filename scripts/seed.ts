@@ -74,7 +74,7 @@ const generateTransactionsForDay = (day: Date) => {
     const isExpense = Math.random() > 0.6; // 60% chance of being an expense
     const amount = generateRandomAmount(category);
     const formattedAmount = convertAmountToMiliunits(
-      isExpense ? -amount : amount
+      isExpense ? -amount : amount,
     ); // Negative for expenses
 
     SEED_TRANSACTIONS.push({

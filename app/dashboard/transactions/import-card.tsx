@@ -24,7 +24,7 @@ type Props = {
 
 export const ImportCard = ({ data, onCancel, onSubmit }: Props) => {
   const [selectedColumns, setSelectedColumns] = useState<SelectedColumnsState>(
-    {}
+    {},
   );
 
   const headers = data[0]; // the headers is always the first row of the csv
@@ -32,7 +32,7 @@ export const ImportCard = ({ data, onCancel, onSubmit }: Props) => {
 
   const onTableHeadSelectChange = (
     columnIndex: number,
-    value: string | null
+    value: string | null,
   ) => {
     setSelectedColumns((prev) => {
       const newSelectedColumns = { ...prev };

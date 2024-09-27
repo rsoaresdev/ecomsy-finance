@@ -24,7 +24,7 @@ const app = new Hono()
         from: z.string().optional(),
         to: z.string().optional(),
         accountId: z.string().optional(),
-      })
+      }),
     ),
     async (c) => {
       const auth = getAuth(c);
@@ -65,13 +65,13 @@ const app = new Hono()
             accountId ? eq(transactions.accountId, accountId) : undefined,
             eq(accounts.userId, auth.userId),
             gte(transactions.date, startDate),
-            lte(transactions.date, endDate)
-          )
+            lte(transactions.date, endDate),
+          ),
         )
         .orderBy(desc(transactions.date));
 
       return c.json({ data });
-    }
+    },
   )
   .get(
     "/:id",
@@ -80,7 +80,7 @@ const app = new Hono()
       "param",
       z.object({
         id: z.string().optional(),
-      })
+      }),
     ),
     async (c) => {
       const auth = getAuth(c);
@@ -115,7 +115,7 @@ const app = new Hono()
       }
 
       return c.json({ data });
-    }
+    },
   )
   .post(
     "/",
@@ -141,7 +141,7 @@ const app = new Hono()
         .returning();
 
       return c.json({ data });
-    }
+    },
   )
   .post(
     "/bulk-create",
@@ -161,12 +161,12 @@ const app = new Hono()
           values.map((value) => ({
             id: createId(),
             ...value,
-          }))
+          })),
         )
         .returning();
 
       return c.json({ data });
-    }
+    },
   )
   // I'm using /bulk-delete on a POST method because I want to pass an array of IDs to delete, somehow I can't do it on a DELETE method
   .post(
@@ -192,9 +192,9 @@ const app = new Hono()
           .where(
             and(
               inArray(transactions.id, values.ids),
-              eq(accounts.userId, auth.userId)
-            )
-          )
+              eq(accounts.userId, auth.userId),
+            ),
+          ),
       );
 
       //? https://orm.drizzle.team/docs/delete#with-delete-clause
@@ -204,15 +204,15 @@ const app = new Hono()
         .where(
           inArray(
             transactions.id,
-            sql`(select id from ${transactionsToDelete})`
-          )
+            sql`(select id from ${transactionsToDelete})`,
+          ),
         )
         .returning({
           id: transactions.id,
         });
 
       return c.json({ data });
-    }
+    },
   )
   .patch(
     "/:id",
@@ -221,13 +221,13 @@ const app = new Hono()
       "param",
       z.object({
         id: z.string().optional(),
-      })
+      }),
     ),
     zValidator(
       "json",
       insertTransactionsSchema.omit({
         id: true,
-      })
+      }),
     ),
     async (c) => {
       const auth = getAuth(c);
@@ -250,7 +250,9 @@ const app = new Hono()
           .innerJoin(accounts, eq(transactions.accountId, accounts.id))
           // (1) check if the transaction is present in destructured param
           // (2) check if the transaction (via innerJoin relation to accounts) is propriety from the user
-          .where(and(eq(transactions.id, id), eq(accounts.userId, auth.userId)))
+          .where(
+            and(eq(transactions.id, id), eq(accounts.userId, auth.userId)),
+          ),
       );
 
       const [data] = await db
@@ -260,8 +262,8 @@ const app = new Hono()
         .where(
           inArray(
             transactions.id,
-            sql`(select id from ${transactionsToUpdate})`
-          )
+            sql`(select id from ${transactionsToUpdate})`,
+          ),
         )
         .returning();
 
@@ -270,7 +272,7 @@ const app = new Hono()
       }
 
       return c.json({ data });
-    }
+    },
   )
   .delete(
     "/:id",
@@ -279,7 +281,7 @@ const app = new Hono()
       "param",
       z.object({
         id: z.string().optional(),
-      })
+      }),
     ),
     async (c) => {
       const auth = getAuth(c);
@@ -301,7 +303,9 @@ const app = new Hono()
           .innerJoin(accounts, eq(transactions.accountId, accounts.id))
           // (1) check if the transaction is present in destructured param
           // (2) check if the transaction (via innerJoin relation to accounts) is propriety from the user
-          .where(and(eq(transactions.id, id), eq(accounts.userId, auth.userId)))
+          .where(
+            and(eq(transactions.id, id), eq(accounts.userId, auth.userId)),
+          ),
       );
 
       const [data] = await db
@@ -310,8 +314,8 @@ const app = new Hono()
         .where(
           inArray(
             transactions.id,
-            sql`(select id from ${transactionsToDelete})`
-          )
+            sql`(select id from ${transactionsToDelete})`,
+          ),
         )
         .returning({
           id: transactions.id,
@@ -322,7 +326,7 @@ const app = new Hono()
       }
 
       return c.json({ data });
-    }
+    },
   );
 
 export default app;

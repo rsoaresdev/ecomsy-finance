@@ -31,7 +31,7 @@ const app = new Hono()
       "param",
       z.object({
         id: z.string().optional(),
-      })
+      }),
     ),
     async (c) => {
       const auth = getAuth(c);
@@ -60,7 +60,7 @@ const app = new Hono()
       }
 
       return c.json({ data });
-    }
+    },
   )
   .post(
     "/",
@@ -84,7 +84,7 @@ const app = new Hono()
         .returning();
 
       return c.json({ data });
-    }
+    },
   )
   // I'm using /bulk-delete on a POST method because I want to pass an array of IDs to delete, somehow I can't do it on a DELETE method
   .post(
@@ -104,15 +104,15 @@ const app = new Hono()
         .where(
           and(
             eq(accounts.userId, auth.userId),
-            inArray(accounts.id, values.ids)
-          )
+            inArray(accounts.id, values.ids),
+          ),
         )
         .returning({
           id: accounts.id,
         });
 
       return c.json({ data });
-    }
+    },
   )
   .patch(
     "/:id",
@@ -121,13 +121,13 @@ const app = new Hono()
       "param",
       z.object({
         id: z.string().optional(),
-      })
+      }),
     ),
     zValidator(
       "json",
       insertAccountSchema.pick({
         name: true,
-      })
+      }),
     ),
     async (c) => {
       const auth = getAuth(c);
@@ -155,7 +155,7 @@ const app = new Hono()
       }
 
       return c.json({ data });
-    }
+    },
   )
   .delete(
     "/:id",
@@ -164,7 +164,7 @@ const app = new Hono()
       "param",
       z.object({
         id: z.string().optional(),
-      })
+      }),
     ),
     async (c) => {
       const auth = getAuth(c);
@@ -192,7 +192,7 @@ const app = new Hono()
       }
 
       return c.json({ data });
-    }
+    },
   );
 
 export default app;

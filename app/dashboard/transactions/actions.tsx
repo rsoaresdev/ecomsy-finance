@@ -25,7 +25,7 @@ export const Actions = ({ id }: Props) => {
 
   const [ConfirmDialog, confirm] = useConfirm(
     "Tem a certeza?",
-    "Ao confirmar está a apagar esta transação permanentemente."
+    "Ao confirmar está a apagar esta transação permanentemente.",
   );
 
   const handleDelete = async () => {

@@ -30,7 +30,7 @@ export const EditCategorySheet = () => {
 
   const [ConfirmDialog, confirm] = useConfirm(
     "Tem a certeza?",
-    "Ao confirmar está a apagar esta categoria permanentemente."
+    "Ao confirmar está a apagar esta categoria permanentemente.",
   );
 
   const categoryQuery = useGetCategory(id);

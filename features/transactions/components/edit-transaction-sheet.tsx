@@ -35,7 +35,7 @@ export const EditTransactionSheet = () => {
 
   const [ConfirmDialog, confirm] = useConfirm(
     "Tem a certeza?",
-    "Ao confirmar está a apagar esta transação permanentemente."
+    "Ao confirmar está a apagar esta transação permanentemente.",
   );
 
   const transactionQuery = useGetTransaction(id);
@@ -98,7 +98,7 @@ export const EditTransactionSheet = () => {
         accountId: transactionQuery.data.accountId,
         categoryId: transactionQuery.data.categoryId,
         amount: convertAmountFromMiliunits(
-          transactionQuery.data.amount
+          transactionQuery.data.amount,
         ).toString(),
         date: transactionQuery.data.date
           ? new Date(transactionQuery.data.date)
