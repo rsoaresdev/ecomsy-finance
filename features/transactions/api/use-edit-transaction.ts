@@ -1,9 +1,8 @@
-import { toast } from "sonner";
-import { InferRequestType, InferResponseType } from "hono";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {InferRequestType, InferResponseType} from "hono";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 
-import { client } from "@/lib/hono";
-import { toastAlert } from "@/lib/utils";
+import {client} from "@/lib/hono";
+import {toastAlert} from "@/lib/utils";
 
 type ResponseType = InferResponseType<
   (typeof client.api.transactions)[":id"]["$patch"]
@@ -15,24 +14,22 @@ type RequestType = InferRequestType<
 export const useEditTransaction = (id?: string) => {
   const queryClient = useQueryClient();
 
-  const mutation = useMutation<ResponseType, Error, RequestType>({
+  return useMutation<ResponseType, Error, RequestType>({
     mutationFn: async (json) => {
       const response = await client.api.transactions[":id"].$patch({
-        param: { id },
+        param: {id},
         json,
       });
       return await response.json();
     },
     onSuccess: () => {
       toastAlert("Transação atualizada com sucesso", "success");
-      queryClient.invalidateQueries({ queryKey: ["transaction", { id }] });
-      queryClient.invalidateQueries({ queryKey: ["transactions"] });
-      queryClient.invalidateQueries({ queryKey: ["summary"] });
+      queryClient.invalidateQueries({queryKey: ["transaction", {id}]});
+      queryClient.invalidateQueries({queryKey: ["transactions"]});
+      queryClient.invalidateQueries({queryKey: ["summary"]});
     },
     onError: () => {
       toastAlert("Ocorreu um erro ao editar a transação", "danger");
     },
   });
-
-  return mutation;
 };

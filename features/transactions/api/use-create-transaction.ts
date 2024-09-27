@@ -1,9 +1,8 @@
-import { toast } from "sonner";
-import { InferRequestType, InferResponseType } from "hono";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {InferRequestType, InferResponseType} from "hono";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 
-import { client } from "@/lib/hono";
-import { toastAlert } from "@/lib/utils";
+import {client} from "@/lib/hono";
+import {toastAlert} from "@/lib/utils";
 
 type ResponseType = InferResponseType<typeof client.api.transactions.$post>;
 type RequestType = InferRequestType<
@@ -13,20 +12,18 @@ type RequestType = InferRequestType<
 export const useCreateTransaction = () => {
   const queryClient = useQueryClient();
 
-  const mutation = useMutation<ResponseType, Error, RequestType>({
+  return useMutation<ResponseType, Error, RequestType>({
     mutationFn: async (json) => {
-      const response = await client.api.transactions.$post({ json });
+      const response = await client.api.transactions.$post({json});
       return await response.json();
     },
     onSuccess: () => {
       toastAlert("Transação criada com sucesso", "success");
-      queryClient.invalidateQueries({ queryKey: ["transactions"] });
-      queryClient.invalidateQueries({ queryKey: ["summary"] });
+      queryClient.invalidateQueries({queryKey: ["transactions"]});
+      queryClient.invalidateQueries({queryKey: ["summary"]});
     },
     onError: () => {
       toastAlert("Ocorreu um erro ao criar a transação", "danger");
     },
   });
-
-  return mutation;
 };

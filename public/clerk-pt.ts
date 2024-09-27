@@ -41,21 +41,21 @@ const ClerkPT = {
   formFieldHintText__optional: "Opcional",
   formFieldHintText__slug:
     "Um rótulo é um identificador legível por humanos que deve ser único. É comumente usado em URLs.",
-  formFieldInputPlaceholder__backupCode: "",
+  formFieldInputPlaceholder__backupCode: undefined,
   formFieldInputPlaceholder__confirmDeletionUserAccount: "Delete account",
-  formFieldInputPlaceholder__emailAddress: "",
-  formFieldInputPlaceholder__emailAddress_username: "",
+  formFieldInputPlaceholder__emailAddress: undefined,
+  formFieldInputPlaceholder__emailAddress_username: undefined,
   formFieldInputPlaceholder__emailAddresses:
     "Insira um ou mais endereços de e-mail separados por espaços ou vírgulas",
-  formFieldInputPlaceholder__firstName: "",
-  formFieldInputPlaceholder__lastName: "",
-  formFieldInputPlaceholder__organizationDomain: "",
-  formFieldInputPlaceholder__organizationDomainEmailAddress: "",
-  formFieldInputPlaceholder__organizationName: "",
-  formFieldInputPlaceholder__organizationSlug: "",
-  formFieldInputPlaceholder__password: "",
-  formFieldInputPlaceholder__phoneNumber: "",
-  formFieldInputPlaceholder__username: "",
+  formFieldInputPlaceholder__firstName: undefined,
+  formFieldInputPlaceholder__lastName: undefined,
+  formFieldInputPlaceholder__organizationDomain: undefined,
+  formFieldInputPlaceholder__organizationDomainEmailAddress: undefined,
+  formFieldInputPlaceholder__organizationName: undefined,
+  formFieldInputPlaceholder__organizationSlug: undefined,
+  formFieldInputPlaceholder__password: undefined,
+  formFieldInputPlaceholder__phoneNumber: undefined,
+  formFieldInputPlaceholder__username: undefined,
   formFieldLabel__automaticInvitations:
     "Ativar convites automáticos para este domínio",
   formFieldLabel__backupCode: "Código de backup",
@@ -127,7 +127,7 @@ const ClerkPT = {
       action__invite: "Convidar",
       activeMembersTab: {
         menuAction__remove: "Remover membro",
-        tableHeader__actions: "",
+        tableHeader__actions: undefined,
         tableHeader__joined: "Entrou",
         tableHeader__role: "Função",
         tableHeader__user: "Utilizador",
@@ -484,8 +484,8 @@ const ClerkPT = {
       "Não foi possível se inscrever devido a falhas nas validações de segurança. Por favor, atualize a página para tentar novamente ou entre em contato com o suporte para obter mais ajuda.",
     captcha_unavailable:
       "Não foi possível se inscrever devido à indisponibilidade do captcha. Por favor atualize a página para tentar novamente ou entre em contato com o suporte para obter mais ajuda.",
-    form_code_incorrect: "",
-    form_identifier_exists: "",
+    form_code_incorrect: undefined,
+    form_identifier_exists: undefined,
     form_identifier_exists__email_address:
       "E-mail já está em uso. Por favor, tente outro.",
     form_identifier_exists__phone_number:
@@ -493,7 +493,7 @@ const ClerkPT = {
     form_identifier_exists__username:
       "Nome de utilizador já está em uso. Por favor, tente outro.",
     form_identifier_not_found: "Não foi possível encontrar o utilizador.",
-    form_param_format_invalid: "",
+    form_param_format_invalid: undefined,
     form_param_format_invalid__email_address:
       "O endereço de e-mail deve ser um endereço de e-mail válido.",
     form_param_format_invalid__phone_number:
@@ -504,7 +504,7 @@ const ClerkPT = {
       "O sobrenome não deve exceder 256 caracteres.",
     form_param_max_length_exceeded__name:
       "O nome não deve exceder 256 caracteres.",
-    form_param_nil: "",
+    form_param_nil: undefined,
     form_password_incorrect: "Senha incorreta.",
     form_password_length_too_short:
       "A sua senha é muito curta. Por favor, tente novamente.",
@@ -800,7 +800,7 @@ const ClerkPT = {
       },
       dangerSection: {
         deleteAccountButton: "Excluir Conta",
-        title: "",
+        title: undefined,
       },
       emailAddressesSection: {
         destructiveAction: "Remover e-mail",
