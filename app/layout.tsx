@@ -9,7 +9,6 @@ import { SheetProvider } from "@/providers/sheet-provider";
 import { ClerkProvider } from "@clerk/nextjs";
 import ClerkPT from "@/public/clerk-pt";
 
-
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });

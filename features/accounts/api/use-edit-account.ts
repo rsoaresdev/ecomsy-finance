@@ -1,8 +1,8 @@
-import {InferRequestType, InferResponseType} from "hono";
-import {useMutation, useQueryClient} from "@tanstack/react-query";
+import { InferRequestType, InferResponseType } from "hono";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import {client} from "@/lib/hono";
-import {toastAlert} from "@/lib/utils";
+import { client } from "@/lib/hono";
+import { toastAlert } from "@/lib/utils";
 
 type ResponseType = InferResponseType<
   (typeof client.api.accounts)[":id"]["$patch"]
@@ -17,17 +17,17 @@ export const useEditAccount = (id?: string) => {
   return useMutation<ResponseType, Error, RequestType>({
     mutationFn: async (json) => {
       const response = await client.api.accounts[":id"].$patch({
-        param: {id},
+        param: { id },
         json,
       });
       return await response.json();
     },
     onSuccess: () => {
       toastAlert("Conta atualizada com sucesso", "success");
-      queryClient.invalidateQueries({queryKey: ["account", {id}]});
-      queryClient.invalidateQueries({queryKey: ["accounts"]});
-      queryClient.invalidateQueries({queryKey: ["transactions"]});
-      queryClient.invalidateQueries({queryKey: ["summary"]});
+      queryClient.invalidateQueries({ queryKey: ["account", { id }] });
+      queryClient.invalidateQueries({ queryKey: ["accounts"] });
+      queryClient.invalidateQueries({ queryKey: ["transactions"] });
+      queryClient.invalidateQueries({ queryKey: ["summary"] });
     },
     onError: () => {
       toastAlert("Ocorreu um erro ao editar a conta", "danger");

@@ -1,8 +1,8 @@
-import {InferRequestType, InferResponseType} from "hono";
-import {useMutation, useQueryClient} from "@tanstack/react-query";
+import { InferRequestType, InferResponseType } from "hono";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import {client} from "@/lib/hono";
-import {toastAlert} from "@/lib/utils";
+import { client } from "@/lib/hono";
+import { toastAlert } from "@/lib/utils";
 
 type ResponseType = InferResponseType<
   (typeof client.api.transactions)["bulk-delete"]["$post"]
@@ -23,8 +23,8 @@ export const useBulkDeleteTransactions = () => {
     },
     onSuccess: () => {
       toastAlert("Transações apagadas com sucesso", "success");
-      queryClient.invalidateQueries({queryKey: ["transactions"]});
-      queryClient.invalidateQueries({queryKey: ["summary"]});
+      queryClient.invalidateQueries({ queryKey: ["transactions"] });
+      queryClient.invalidateQueries({ queryKey: ["summary"] });
     },
     onError: () => {
       toastAlert("Ocorreu um erro ao apagar transações", "danger");
