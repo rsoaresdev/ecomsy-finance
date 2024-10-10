@@ -11,7 +11,7 @@ config({ path: ".env.local" });
 const sql = neon(process.env.DATABASE_URL!);
 const db = drizzle(sql);
 
-const SEED_USER_ID = "user_2ii67yZQWpWB8oJnCusS2R0shPy"; // my Clerk auth userId
+const SEED_USER_ID = "user_2nCWELNX0MT3tMHEvo1PfdSpxME"; // my Clerk auth userId
 const SEED_CATEGORIES = [
   {
     id: "category_1",
@@ -90,7 +90,7 @@ const generateTransactionsForDay = (day: Date) => {
 };
 
 const generateTransactions = () => {
-  const days = eachDayOfInterval({ start: defaultFrom, end: defaultTo });
+  const days = eachDayOfInterval({ start: defaultTo, end: defaultFrom });
   days.forEach((day) => generateTransactionsForDay(day));
 };
 
