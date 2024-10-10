@@ -61,7 +61,7 @@ export const DateFilter = () => {
   };
 
   return (
-    <Popover>
+    <Popover modal={true}>
       <PopoverTrigger asChild>
         <Button
           disabled={false}
